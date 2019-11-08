@@ -1,0 +1,1679 @@
+{
+    "global": {
+        "check_for_updates_on_startup": true,
+        "show_in_menu_bar": true,
+        "show_profile_name_in_menu_bar": false
+    },
+    "profiles": [
+        {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.simultaneous_threshold_milliseconds": 50,
+                    "basic.to_delayed_action_delay_milliseconds": 500,
+                    "basic.to_if_alone_timeout_milliseconds": 1000,
+                    "basic.to_if_held_down_threshold_milliseconds": 500,
+                    "mouse_motion_to_scroll.speed": 100
+                },
+                "rules": [
+                    {
+                        "description": "FN: double right shift to shift+[semicolon]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_shift pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "semicolon",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "right_shift pressed",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "right_shift"
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "right_shift pressed",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "right_shift pressed",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                      "description": "FN: double right option to command+[v]",
+                      "manipulators": [
+                          {
+                              "conditions": [
+                                  {
+                                      "name": "right_option pressed",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "right_option",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "v",
+                                      "modifiers": [
+                                          "right_command"
+                                      ]
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                          {
+                              "from": {
+                                  "key_code": "right_option",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "set_variable": {
+                                          "name": "right_option pressed",
+                                          "value": 1
+                                      }
+                                  },
+                                  {
+                                      "key_code": "right_option"
+                                  }
+                              ],
+                              "to_delayed_action": {
+                                  "to_if_canceled": [
+                                      {
+                                          "set_variable": {
+                                              "name": "right_option pressed",
+                                              "value": 0
+                                          }
+                                      }
+                                  ],
+                                  "to_if_invoked": [
+                                      {
+                                          "set_variable": {
+                                              "name": "right_option pressed",
+                                              "value": 0
+                                          }
+                                      }
+                                  ]
+                              },
+                              "type": "basic"
+                          }
+                      ]
+                  },
+                    {
+                        "description": "FN: caps_lock to escape",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Space enables SpaceFN mode (see: https://geekhack.org/index.php?topic=51069.0)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "spacefn_mode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "spacefn_mode",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "spacebar"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Space+[o] to control+[spacebar], Space+[i] to command+[6]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "right_control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "i",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "6",
+                                      "modifiers": [
+                                          "right_command"
+                                      ]
+                                  }
+                              ],
+                              "type": "basic"
+                          }
+                        ]
+                    },
+                    {
+                      "description": "SpaceFN: Space+[wdeg] to Left, Down, Up, Right",
+                      "manipulators": [
+                                                      {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 0
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "w",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "left_arrow"
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                          {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "w",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "left_arrow",
+                                      "modifiers": [
+                                          "right_shift"
+                                      ]
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                                                      {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 0
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "d",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "down_arrow"
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                          {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "d",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "down_arrow",
+                                      "modifiers": [
+                                          "right_shift"
+                                      ]
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                                                      {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 0
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "e",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "up_arrow"
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                          {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "e",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "up_arrow",
+                                      "modifiers": [
+                                          "right_shift"
+                                      ]
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                                                      {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 0
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "g",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "right_arrow"
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                          {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  },
+                                  {
+                                      "name": "shift pressed",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "g",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "right_arrow",
+                                      "modifiers": [
+                                          "right_shift"
+                                      ]
+                                  }
+                              ],
+                             "type": "basic"
+                          }
+                          
+                      ]
+                  },
+
+                    {
+                        "description": "SpaceFN: Space+[cv] to copy, paste",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "c",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "v",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Space+[1234567890-=] to shift+[1234567890-=]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "1",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "1",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "2",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "2",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "3",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "4",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "5",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "5",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "6",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "6",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "7",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "7",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "8",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "8",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "9",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "0",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "0",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "-",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "-",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "equal_sign",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "equal_sign",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                      "description": "SpaceFN: Space+[hbsx] to delete_or_backspace, delete word, delete_or_backspace, delete_forward",
+                      "manipulators": [
+                          {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "h",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "delete_or_backspace"
+                                  }
+                              ],
+                              "type": "basic"
+                          },
+                          {
+                            "conditions": [
+                                {
+                                    "name": "spacefn_mode",
+                                    "type": "variable_if",
+                                    "value": 1
+                                },
+                                {
+                                  "bundle_identifiers": [
+                                      "^com\\.apple\\.Terminal$"
+                                  ],
+                                  "type": "frontmost_application_if"
+                              }
+                            ],
+                            "from": {
+                                "key_code": "b",
+                                "modifiers": {
+                                    "optional": [
+                                        "any"
+                                    ]
+                                }
+                            },
+                            "to": [
+                                {
+                                    "key_code": "w",
+                                    "modifiers": [
+                                        "right_control"
+                                    ]
+                                }
+                            ],
+                            "type": "basic"
+                        },
+                      {
+                        "conditions": [
+                            {
+                                "name": "spacefn_mode",
+                                "type": "variable_if",
+                                "value": 1
+                            }
+                        ],
+                        "from": {
+                            "key_code": "s",
+                            "modifiers": {
+                                "optional": [
+                                    "any"
+                                ]
+                            }
+                        },
+                        "to": [
+                            {
+                                "key_code": "delete_or_backspace"
+                            }
+                        ],
+                        "type": "basic"
+                    },
+                    {
+                      "conditions": [
+                          {
+                              "name": "spacefn_mode",
+                              "type": "variable_if",
+                              "value": 1
+                          }
+                      ],
+                      "from": {
+                          "key_code": "x",
+                          "modifiers": {
+                              "optional": [
+                                  "any"
+                              ]
+                          }
+                      },
+                      "to": [
+                          {
+                              "key_code": "delete_forward"
+                          }
+                      ],
+                      "type": "basic"
+                  },
+                  {
+                    "conditions": [
+                        {
+                            "name": "spacefn_mode",
+                            "type": "variable_if",
+                            "value": 1
+                        },
+                        {
+                          "bundle_identifiers": [
+                              "^com\\.apple\\.Terminal$"
+                          ],
+                          "type": "frontmost_application_if"
+                      }
+                    ],
+                    "from": {
+                        "key_code": "r",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "4",
+                            "modifiers": [
+                                "right_shift"
+                            ]
+                        }
+                    ],
+                    "type": "basic"
+                }
+
+                      ]
+                      },
+                      {
+                        "description": "SpaceFN: Space+[r] to $",
+                        "manipulators": [
+                              {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
+                                    {
+                                      "bundle_identifiers": [
+                                          "^com\\.apple\\.Terminal$"
+                                      ],
+                                      "type": "frontmost_application_if"
+                                  }
+                                ],
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                               }
+                        ]
+                        },
+                        {
+                          "description": "SpaceFN: Space+[n] to command+[n], Space+[m] to command+[m], Space+[f] to command+[f]",
+                          "manipulators": [
+                              {
+                                  "conditions": [
+                                      {
+                                          "name": "spacefn_mode",
+                                          "type": "variable_if",
+                                          "value": 1
+                                      }
+                                  ],
+                                  "from": {
+                                      "key_code": "n",
+                                      "modifiers": {
+                                          "optional": [
+                                              "any"
+                                          ]
+                                      }
+                                  },
+                                  "to": [
+                                      {
+                                          "key_code": "n",
+                                          "modifiers": [
+                                              "right_command"
+                                          ]
+                                      }
+                                  ],
+                                  "type": "basic"
+                              },
+                              {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
+                                    {
+                                      "bundle_identifiers": [
+                                          "^com\\.apple\\.Safari$"
+                                      ],
+                                      "type": "frontmost_application_if"
+                                  }
+                                ],
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "m",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                              "conditions": [
+                                  {
+                                      "name": "spacefn_mode",
+                                      "type": "variable_if",
+                                      "value": 1
+                                  }
+                              ],
+                              "from": {
+                                  "key_code": "f",
+                                  "modifiers": {
+                                      "optional": [
+                                          "any"
+                                      ]
+                                  }
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "f",
+                                      "modifiers": [
+                                          "right_command"
+                                      ]
+                                  }
+                              ],
+                              "type": "basic"
+                          }
+
+
+                          ]
+                        },
+                      
+
+                    {
+                        "description": "----------------------------------------------------------------------------------------------"
+                    },
+                    {
+                        "description": "SpaceFN: [?] to option",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "?",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_option"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Space+[tab] to shift+[tab]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "tab",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "tab",
+                                        "modifiers": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Space+[a] to command+[left_arrow], Space+[m] to delete_left_line",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "k",
+                                        "modifiers": [
+                                            "right_control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Space+[q] to word back move",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "right_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "keyword_mode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "keyword_mode",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "keyword_mode",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Space+[comma] to command+[comma]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "comma",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: delete_mode: j to delete_or_backspace, l to delete",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacefn_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "delete_mode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "delete_mode",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "SpaceFN: Delete Mode: yd, yk",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "keyword_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "y",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "keyword_mode",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": [
+                                            "right_command",
+                                            "right_shift"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "x",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "delete_forward"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "FN: fn enables FN mode",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "fn",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "fn_mode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "fn_mode",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "fn"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Change Won (₩) to grave accent (`) in Korean layout.",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "input_sources": [
+                                            {
+                                                "language": "ko"
+                                            }
+                                        ],
+                                        "type": "input_source_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "grave_accent_and_tilde",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "grave_accent_and_tilde",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 615,
+                        "vendor_id": 76
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": []
+                }
+            ],
+            "fn_function_keys": [
+                {
+                    "from": {
+                        "key_code": "f1"
+                    },
+                    "to": {
+                        "consumer_key_code": "display_brightness_decrement"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f2"
+                    },
+                    "to": {
+                        "consumer_key_code": "display_brightness_increment"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f3"
+                    },
+                    "to": {
+                        "key_code": "mission_control"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f4"
+                    },
+                    "to": {
+                        "key_code": "launchpad"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f5"
+                    },
+                    "to": {
+                        "key_code": "illumination_decrement"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f6"
+                    },
+                    "to": {
+                        "key_code": "illumination_increment"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f7"
+                    },
+                    "to": {
+                        "consumer_key_code": "rewind"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f8"
+                    },
+                    "to": {
+                        "consumer_key_code": "play_or_pause"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f9"
+                    },
+                    "to": {
+                        "consumer_key_code": "fastforward"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f10"
+                    },
+                    "to": {
+                        "consumer_key_code": "mute"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f11"
+                    },
+                    "to": {
+                        "consumer_key_code": "volume_decrement"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "f12"
+                    },
+                    "to": {
+                        "consumer_key_code": "volume_increment"
+                    }
+                }
+            ],
+            "name": "Default profile",
+            "parameters": {
+                "delay_milliseconds_before_open_device": 1000
+            },
+            "selected": true,
+            "simple_modifications": [],
+            "virtual_hid_keyboard": {
+                "country_code": 0,
+                "mouse_key_xy_scale": 100
+            }
+        }
+    ]
+}
